@@ -1,10 +1,30 @@
 ﻿@page
+@using DutchTaxesApp.Models
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form method="post" class="form">
+    <div>
+        @Html.LabelFor(m => m.Income):<br/>
+        @Html.TextBoxFor(m => m.Income)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Period):<br/>
+        @*dropdown for 'Period' enum*@
+        @Html.DropDownListFor(
+            m => m.Period,
+            new SelectList(Enum.GetValues(typeof(Period))),
+            "Select period"
+            )
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.HoursPerWeek, "Hours per week"):<br/>
+        @Html.TextBoxFor(m => m.HoursPerWeek)
+    </div>
+
+    <button type="submit">Calculate</button>
+</form>

@@ -8,18 +8,18 @@ namespace DutchTaxesApp.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    
+
     [BindProperty]
     [Required, Range(0, 1_000_000)]
-    public float? Income { get; set; }
+    public float Income { get; set; }
     
     [BindProperty]
     [Required, EnumDataType(typeof(Period))]
-    public Period? Period { get; set; }
+    public Period Period { get; set; } = Period.Monthly;
     
     [BindProperty]
-    [Required, Range(1, 168)]
-    public int? HoursPerWeek { get; set; }
+    [Required, Range(1, 112)]
+    public int Hours { get; set; } = 40;
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -29,10 +29,6 @@ public class IndexModel : PageModel
     public IActionResult OnPost()
     {
         if (!ModelState.IsValid) return Page();
-
-        var income = Income ?? 0f;
-        var hpw = HoursPerWeek ?? 1;
-        var period = Period ?? Models.Period.Annual;
 
         /*if (hoursPerWeek != 40 && wagePeriod != Pages.WagePeriod.Hourly)
             wage *= 40f / hoursPerWeek;
@@ -45,6 +41,6 @@ public class IndexModel : PageModel
             _ => throw new ArgumentOutOfRangeException()
         };*/ // This is calculated on Calculation page
         
-        return RedirectToPage("Calculation", new { income, hpw, period });
+        return RedirectToPage("Calculation", new { Income, Hours, Period });
     }
 }

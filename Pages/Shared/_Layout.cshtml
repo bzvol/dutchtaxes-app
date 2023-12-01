@@ -6,25 +6,12 @@
     <title>@ViewData["Title"] - DutchTaxesApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DutchTaxesApp.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Index.cshtml.css" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <header>
-        <h1 class="title">Loonheffings calculator</h1>
-    </header>
-
-    <div>
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer">
-        <div class="container">
-            &copy; 2023 &#149; DutchTaxes App &#149; by Benjamin Zvolenszki &#149; Made with &hearts; from Hungary
-        </div>
-    </footer>
+    <main role="main">
+        @RenderBody()
+    </main>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

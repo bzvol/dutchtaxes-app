@@ -1,0 +1,161 @@
+﻿{
+  "name": "Loonheffing",
+  "country": {
+    "name": "Netherlands",
+    "code": "nl"
+  },
+  "year": 2023,
+  "custom_props": {
+    "age_range": "Jonger dan de AOW-leeftijd"
+  },
+  "taxes": [
+    {
+      "id": "loonbelasting",
+      "name": "Loonbelasting",
+      "rating": "tiered",
+      "tiers": [
+        {
+          "income": {
+            "min": 0,
+            "max": 37150
+          },
+          "rate": 0.0928
+        },
+        {
+          "income": {
+            "min": 37150,
+            "max": 73032
+          },
+          "rate": 0.3693
+        },
+        {
+          "income": {
+            "min": 73032,
+            "max": null
+          },
+          "rate": 0.495
+        }
+      ]
+    },
+    {
+      "id": "volksverzekeringen",
+      "name": "Volksverzekeringen",
+      "rating": "single_capped",
+      "income": {
+        "min": 0,
+        "max": 37150
+      },
+      "type": "collective",
+      "rates": [
+        {
+          "id": "aow",
+          "name": "AOW",
+          "rate": 0.179
+        },
+        {
+          "id": "anw",
+          "name": "ANW",
+          "rate": 0.001
+        },
+        {
+          "id": "wlz",
+          "name": "WLZ",
+          "rate": 0.0965
+        }
+      ]
+    }
+  ],
+  "tax_discounts": [
+    {
+      "id": "algemene_heffingskorting",
+      "name": "Algemene heffingskorting",
+      "type": "unconditional",
+      "rating": "tiered_capped",
+      "tiers": [
+        {
+          "income": {
+            "min": 0,
+            "max": 22660
+          },
+          "value": {
+            "type": "fixed",
+            "amount": 3070
+          }
+        },
+        {
+          "income": {
+            "min": 22660,
+            "max": 73031
+          },
+          "value": {
+            "type": "formula",
+            "formula": "3070 - 0.0695 * (x - 22660)",
+            "inputs": {
+              "x": "income"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arbeidskorting",
+      "name": "Arbeidskorting",
+      "type": "unconditional",
+      "rating": "tiered_capped",
+      "tiers": [
+        {
+          "income": {
+            "min": 0,
+            "max": 10741
+          },
+          "value": {
+            "type": "formula",
+            "formula": "0.08231 * x",
+            "inputs": {
+              "x": "income"
+            }
+          }
+        },
+        {
+          "income": {
+            "min": 10741,
+            "max": 23201
+          },
+          "value": {
+            "type": "formula",
+            "formula": "884 + 0.29861 * (x - 10740)",
+            "inputs": {
+              "x": "income"
+            }
+          }
+        },
+        {
+          "income": {
+            "min": 23201,
+            "max": 37691
+          },
+          "value": {
+            "type": "formula",
+            "formula": "4605 + 0.03085 * (x - 23201)",
+            "inputs": {
+              "x": "income"
+            }
+          }
+        },
+        {
+          "income": {
+            "min": 37691,
+            "max": 115295
+          },
+          "value": {
+            "type": "formula",
+            "formula": "5052 - 0.06510 * (x - 37691)",
+            "inputs": {
+              "x": "income"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
